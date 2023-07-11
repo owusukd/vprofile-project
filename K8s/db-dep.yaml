@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprofiledb
+  labels:
+    app: vprofiledb
+spec:
+  selector:
+    matchLabels:
+      app: vprofiledb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vprofiledb
+    spec:
+      containers:
+      - name: vprofiledb
+        image: owusukd/vprofiledb:latest
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: vprofiledb-data
+        ports:
+        - name: vprofiledb-port
+          containerPort: 3306
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: vprofileapp-secret
+                key: db_pass
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: vprofileapp-secret
+                key: db_database
+      nodeSelector:
+        zone: us-east-1a
+      volumes:
+        - name: vprofiledb-data
+          awsElasticBlockStore:
+            volumeID: vol-082ad752251381894
+            fsType: ext4
+      initContainers:
+        - name: busybox
+          image: busybox:latest
+          args: ["rm", "-rf", "/var/lib/mysql/*"]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: vprofiledb-data 
