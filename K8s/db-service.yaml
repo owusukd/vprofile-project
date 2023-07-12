@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vprodb            # name of the db host in application.properties file
+spec:
+  type: ClusterIP
+  selector:
+    app: vprofiledb
+  ports:
+  - port: 3306
+    targetPort: vprofiledb-port
+    protocol: TCP
