@@ -8,5 +8,5 @@ spec:
     app: vprofileapp
   ports:
   - port: 8080
-    targetPort: vprofileapp-port
+    targetPort: app-port
     protocol: TCP
