@@ -8,5 +8,5 @@ spec:
     app: vprofiledb
   ports:
   - port: 3306
-    targetPort: vprofiledb-port
+    targetPort: db-port
     protocol: TCP
