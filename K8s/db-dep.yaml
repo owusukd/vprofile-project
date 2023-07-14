@@ -39,7 +39,7 @@ spec:
       volumes:
         - name: vprofiledb-data
           awsElasticBlockStore:
-            volumeID: vol-0257d00d140afd066
+            volumeID: vol-08b656f0dfb1ba4fc
             fsType: ext4
 # initContainer to delete content of mount volume path 
 # this allow MySQL to work properly      
