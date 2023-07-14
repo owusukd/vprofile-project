@@ -18,5 +18,5 @@ spec:
       - name: vprocache01
         image: memcached
         ports:
-        - name: vprocache01-port
+        - name: memc-port
           containerPort: 11211
